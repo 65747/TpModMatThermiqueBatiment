@@ -1,0 +1,42 @@
+ETAPE 3 - TEMPERATURE DE LA PIECE
+
+EQUATION
+
+C * dT/dt = G * (Te - T)
+
+La solution théorique est :
+T(t) = Te + (T0 - Te) * exp(-t/tau)
+tau = C/G
+
+Pour C = 1208 J/K et G = 1,8 W/K, tau = 671,1 secondes.
+Pour G = 0,65 W/K, tau = 1858,5 secondes.
+Une isolation plus forte ralentit le refroidissement.
+
+EULER EXPLICITE
+
+T suivant = T actuel + (G*dt/C) * (Te - T actuel)
+
+La température reste stable si dt <= 2*C/G.
+Pour éviter les oscillations, dt <= C/G.
+Avec C = 1208 et G = 1,8 :
+
+- dt = 200 s : convergence sans oscillation.
+- dt = 10 s : résultat plus proche de la solution théorique.
+- dt = 1000 s : convergence avec oscillations.
+- dt = 1500 s : divergence.
+
+BATIMENT TEMOIN
+
+Surface au sol : 20 m². Hauteur : 2,5 m. Volume d'air : 50 m³.
+Capacité de l'air : 60 440,8 J/K.
+Capacité du mobilier : 400 000 J/K.
+Capacité totale C : 460 440,8 J/K.
+Conductance des murs G : 200 W/K.
+Temps caracteristique tau : 2302,2 s.
+
+Avec la météo et un pas de 600 s, sans chauffage, le modèle donne une
+température minimale de -11,37 °C et maximale de 20 °C.
+Ce modèle ne prend pas encore en compte l'inertie des murs.
+
+La méthode implicite est également disponible. Elle converge sans
+oscillation pour tout pas positif avec une température extérieure constante.
